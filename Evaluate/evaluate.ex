@@ -53,7 +53,6 @@ defmodule Evaluate do
 	def div(a, b, env) do {:div, eval(a, env), eval(b, env)} end
 
   def test1() do
-    #((8/3) + x) / ((5/2) - y)
     environment = new_env()
     environment = new_env({:x, 8}, environment)
     environment = new_env({:y, 2}, environment)
@@ -61,7 +60,6 @@ defmodule Evaluate do
   end
 
   def test2() do
-    #(5/7)*x + (y - ((4/5)*7)
     environment = new_env()
     environment = new_env({:x, 9}, environment)
     environment = new_env({:y, 4}, environment)
