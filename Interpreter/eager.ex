@@ -1,5 +1,8 @@
 defmodule Eager do
-
+@moduledoc """
+The following code is in large part inspired by example code
+provided in assignment description for course assignment.
+"""
 @doc """
   Evaluation of expressions
 """
