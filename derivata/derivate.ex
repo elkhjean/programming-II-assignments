@@ -97,6 +97,8 @@ defmodule Derivate do
   def simplify_add({:var, v}, {:var, v}) do {:mul, {:num, 2}, {:var, v}} end
   def simplify_add(f, g) do {:add, f, g} end
 
+  def simplify_mul({:mul, {:num, n}, {:add, {:var, v1}, {:var, v2}}}) do {:add, {:mul, n, v1}, {:mul, n, v2}} end
+  def simplify_mul({:mul, {:add, {:var, v1}, {:var, v2}}, {:num, n}}) do {:add, {:mul, n, v1}, {:mul, n, v2}} end
   def simplify_mul({:num, 0}, _) do {:num, 0} end
   def simplify_mul(_, {:num, 0}) do {:num, 0} end
   def simplify_mul({:num, n1}, {:num, n2}) do {:num, n1*n2} end
@@ -117,7 +119,6 @@ defmodule Derivate do
   def simplify_mul({:mul, e, {:num, n1}}, {:num, n2}) do
     {:mul, {:num, n1*n2}, e}
   end
-  # def simplify_mul({{:mul, {:var, v}, {:add, }}}) do  end
   def simplify_mul(f, g) do {:mul, f, g} end
 
   def simplify_exp(_, {:num, 0}) do  1 end
@@ -127,8 +128,7 @@ defmodule Derivate do
 
   def test1() do
     test =
-      {:add, {:mul, {:num, 4}, {:exp, {:var, :x}, {:num, 2}}},
-       {:add, {:mul, {:num, 3}, {:var, :x}}, {:num, 42}}}
+      {:mul, {:num, 5}, {:add, {:mul, {:num, 2}, {:exp, {:var, :x}, {:num, 5}}}, {:mul, {:num, 3}, {:exp, {:var, :x}, {:num, 3}}}}}
     der = derive(test, :x)
     simple_derivate = simplify(der)
 
