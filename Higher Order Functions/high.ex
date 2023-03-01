@@ -1,6 +1,6 @@
 defmodule High do
 @moduledoc """
-Excercise in recursive functions
+Excercise in higher order functions
 """
 
 
@@ -73,7 +73,6 @@ Excercise in recursive functions
   def fold_left([h|t], acc, fun) do
     fold_left(t, fun.(h, acc), fun)
   end
-
 
 
   def odd([]) do [] end
